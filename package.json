@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "description": "Decentralized content verification and provenance platform on the Stellar blockchain",
   "scripts": {
-    "dev:frontend": "pnpm --filter frontend dev",
-    "build:frontend": "pnpm --filter frontend build",
-    "build:frontend:analyze": "pnpm --filter frontend run build:analyze",
-    "build:contracts": "cd contracts/oracle && stellar contract build && cd ../provenance && stellar contract build && cd ../registry && stellar contract build",
+    "dev:frontend": "node init && pnpm --filter frontend dev",
+    "build:frontend": "node init && pnpm --filter frontend build",
+    "build:frontend:analyze": "node init && pnpm --filter frontend run build:analyze",
+    "build:contracts": "node init && cd contracts/oracle && stellar contract build && cd ../provenance && stellar contract build && cd ../registry && stellar contract build",
     "docs:contracts": "cargo doc --manifest-path contracts/oracle/Cargo.toml --no-deps && cargo doc --manifest-path contracts/provenance/Cargo.toml --no-deps && cargo doc --manifest-path contracts/registry/Cargo.toml --no-deps",
     "check:frontend": "pnpm --filter frontend lint",
     "check:bundle": "pnpm --filter frontend run build:check-size",
@@ -33,7 +33,13 @@
     "release": "semantic-release",
     "prepare": "husky"
   },
-  "keywords": ["stellar", "soroban", "blockchain", "verification", "provenance"],
+  "keywords": [
+    "stellar",
+    "soroban",
+    "blockchain",
+    "verification",
+    "provenance"
+  ],
   "license": "MIT",
   "packageManager": "pnpm@10.18.2",
   "lint-staged": {
@@ -41,8 +47,12 @@
       "prettier --write",
       "pnpm --filter frontend exec eslint --fix --config eslint.config.mjs"
     ],
-    "**/*.{js,jsx,json,css,md,yml,yaml}": ["prettier --write"],
-    "contracts/**/*.rs": ["rustfmt --edition 2021"]
+    "**/*.{js,jsx,json,css,md,yml,yaml}": [
+      "prettier --write"
+    ],
+    "contracts/**/*.rs": [
+      "rustfmt --edition 2021"
+    ]
   },
   "devDependencies": {
     "@semantic-release/changelog": "^7.0.0",

@@ -3,11 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build && node lib/error-tracking/source-map-upload.js",
-    "build:analyze": "ANALYZE=true next build",
-    "build:check-size": "size-limit",
-    "start": "next start",
+    "dev": "node init && next dev",
+    "build": "node init && next build && node lib/error-tracking/source-map-upload.js",
+    "build:analyze": "node init && ANALYZE=true next build",
+    "build:check-size": "node init && size-limit",
+    "start": "node init && next start",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
     "test": "jest",
@@ -76,7 +76,15 @@
     "wait-on": "^8.0.1"
   },
   "size-limit": [
-    { "path": ".next/static/chunks/main-*.js", "limit": "300KB", "gzip": true },
-    { "path": ".next/static/css/global-*.css", "limit": "50KB", "gzip": true }
+    {
+      "path": ".next/static/chunks/main-*.js",
+      "limit": "300KB",
+      "gzip": true
+    },
+    {
+      "path": ".next/static/css/global-*.css",
+      "limit": "50KB",
+      "gzip": true
+    }
   ]
 }
